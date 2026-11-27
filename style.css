@@ -1,0 +1,299 @@
+
+*
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #e23744;
+  --primary-dark: #c42330;
+  --bg-page: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-main: #1c1c1c;
+  --text-muted: #696969;
+  --border-color: #e8e8e8;
+  --radius: 0.75rem;
+  --space-fluid: clamp(1rem, 2.5vw, 2rem);
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* ========== Q1: Responsive Header & Navbar (Flexbox) ========== */
+.site-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: 0.85rem var(--space-fluid);
+  /* Mobile-first Flexbox layout */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.brand-logo span {
+  color: var(--primary);
+}
+
+.search-bar {
+  order: 3;
+  flex: 1 1 100%;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.main-nav {
+  order: 2;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-list a:hover {
+  color: var(--primary);
+}
+
+.nav-list .cart-btn {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.5rem;
+}
+
+.nav-list .cart-btn:hover {
+  background-color: var(--primary-dark);
+  color: #ffffff;
+}
+
+/* ========== Categories Strip ========== */
+main {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: var(--space-fluid);
+}
+
+.categories-section h1 {
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  margin-bottom: 0.35rem;
+}
+
+.categories-section p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.category-pills {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.pill {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  padding: 0.45rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.pill.active,
+.pill:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* ========== Q2: Restaurant Listing Grid (CSS Grid) ========== */
+.restaurants-section h2 {
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  margin-bottom: 1.25rem;
+}
+
+.restaurant-grid {
+  display: grid;
+  /* Mobile-first: 1 fluid column */
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+/* Q3: Container Query Context on each grid item */
+.card-wrapper {
+  container-type: inline-size;
+  container-name: restaurant-card;
+}
+
+.restaurant-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover Effect */
+.restaurant-card:hover {
+  transform: translateY(-0.35rem);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-card img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-top h3 {
+  font-size: 1.1rem;
+}
+
+.rating {
+  background-color: #24963f;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.35rem;
+  white-space: nowrap;
+}
+
+.cuisine {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+  margin-top: auto;
+}
+
+.menu-btn {
+  display: inline-block;
+  text-align: center;
+  margin-top: 0.5rem;
+  padding: 0.55rem 1rem;
+  background-color: #fff0f1;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-btn:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* ========== Q3: Container Query (Card-Level Responsiveness) ========== */
+@container restaurant-card (min-width: 440px) {
+  .restaurant-card {
+    flex-direction: row;
+  }
+
+  .restaurant-card img {
+    width: 42%;
+    height: auto;
+  }
+}
+
+/* ========== Q3: Mobile-First Media Queries ========== */
+/* Tablet View (>= 640px) */
+@media (min-width: 40rem) {
+  .search-bar {
+    order: 2;
+    flex: 1 1 16rem;
+    max-width: 24rem;
+  }
+
+  .main-nav {
+    order: 3;
+  }
+
+  .restaurant-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop View (>= 1024px) */
+@media (min-width: 64rem) {
+  .restaurant-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+}
